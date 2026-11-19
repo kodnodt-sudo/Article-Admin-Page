@@ -116,12 +116,12 @@ export function CompanyArticlesTable({
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Filter articles by title or slug..."
             aria-label="Filter articles"
-            className="h-8 pl-8 text-[13px]"
+            className="h-9 sm:h-8 pl-8 text-[16px] sm:text-[13px]"
           />
         </div>
 
         <div
-          className="inline-flex rounded-md border border-[#E5E7EB] bg-[#FAFAFA] p-0.5"
+          className="inline-flex w-full sm:w-auto rounded-md border border-[#E5E7EB] bg-[#FAFAFA] p-0.5"
           role="group"
           aria-label="Filter by status"
         >
@@ -140,8 +140,8 @@ export function CompanyArticlesTable({
                 onClick={() => setStatusFilter(status)}
                 className={
                   active
-                    ? "rounded px-2.5 py-1 text-[12px] font-medium bg-white text-[#111827] shadow-sm"
-                    : "rounded px-2.5 py-1 text-[12px] font-medium text-[#6B7280] hover:text-[#111827]"
+                    ? "flex-1 sm:flex-initial rounded px-2.5 py-1.5 sm:py-1 text-[12px] font-medium bg-white text-[#111827] shadow-sm"
+                    : "flex-1 sm:flex-initial rounded px-2.5 py-1.5 sm:py-1 text-[12px] font-medium text-[#6B7280] hover:text-[#111827]"
                 }
               >
                 {label}
@@ -199,7 +199,64 @@ export function CompanyArticlesTable({
         </div>
       ) : (
         <div className="overflow-hidden rounded-lg border border-[#E5E7EB] bg-white">
-          <div className="overflow-x-auto">
+          {/* Mobile card list */}
+          <div className="divide-y divide-[#E5E7EB] sm:hidden">
+            {paginated.map((article) => {
+              const authorLabel =
+                article.author?.full_name ||
+                article.author?.email ||
+                "Editorial team";
+              return (
+                <div key={article.id} className="p-4 space-y-2.5">
+                  <div className="flex items-start justify-between gap-2">
+                    <Link
+                      href={`/companies/${companySlug}/articles/${article.id}`}
+                      className="font-medium text-[14px] leading-snug text-[#111827] hover:text-[#1E3A8A]"
+                    >
+                      {article.title || "Untitled article"}
+                    </Link>
+                    <Badge
+                      variant={
+                        article.status === "published" ? "published" : "draft"
+                      }
+                      className="shrink-0"
+                    >
+                      {article.status === "published" ? "Published" : "Draft"}
+                    </Badge>
+                  </div>
+                  <p className="truncate text-[12px] text-[#6B7280]">
+                    /{article.slug}
+                  </p>
+                  <div className="flex items-center justify-between text-[12px] text-[#6B7280]">
+                    <span className="truncate">{authorLabel}</span>
+                    <span className="shrink-0 tabular-nums">
+                      {formatDate(article.updated_at)}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 pt-1">
+                    <Link
+                      href={`/companies/${companySlug}/articles/${article.id}`}
+                      className="inline-flex h-9 flex-1 items-center justify-center gap-1.5 rounded-md border border-[#E5E7EB] bg-white text-[13px] font-medium text-[#111827] active:bg-[#FAFAFA]"
+                    >
+                      <Pencil className="h-3.5 w-3.5" aria-hidden="true" />
+                      Edit
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => setDeleteTarget(article)}
+                      className="inline-flex h-9 items-center justify-center gap-1.5 rounded-md border border-[#FECACA] bg-white px-3 text-[13px] font-medium text-[#DC2626] active:bg-[#FEF2F2]"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop table */}
+          <div className="hidden overflow-x-auto sm:block">
             <table className="w-full border-collapse text-left text-[13px]">
               <thead>
                 <tr className="border-b border-[#E5E7EB] bg-[#FAFAFA] text-[12px] font-medium text-[#6B7280]">

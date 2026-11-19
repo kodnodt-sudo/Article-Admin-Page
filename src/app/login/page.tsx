@@ -15,9 +15,9 @@ export default async function LoginPage() {
   }
 
   return (
-    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
+    <div className="grid min-h-dvh grid-cols-1 lg:grid-cols-2">
       {/* Left panel: simple form on white */}
-      <div className="flex flex-col justify-between bg-white px-6 py-8 sm:px-12 lg:px-16">
+      <div className="flex flex-col justify-between bg-white px-5 py-6 sm:px-12 sm:py-8 lg:px-16">
         <div className="flex items-center">
           <img
             src="/kodnod-logo.png"

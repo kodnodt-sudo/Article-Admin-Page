@@ -204,7 +204,7 @@ export function TiptapEditor({
   return (
     <div className="rounded-lg border border-[#E5E7EB] bg-white">
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-0.5 border-b border-[#E5E7EB] bg-[#FAFAFA] px-2 py-1.5">
+      <div className="flex flex-wrap items-center gap-1 sm:gap-0.5 border-b border-[#E5E7EB] bg-[#FAFAFA] px-2 py-1.5">
         {toolbarButtons.map((item) => {
           const Icon = item.icon;
           return (
@@ -216,12 +216,12 @@ export function TiptapEditor({
               aria-label={item.label}
               aria-pressed={item.active}
               className={cn(
-                "inline-flex h-7 w-7 items-center justify-center rounded text-[#6B7280] transition-colors",
+                "inline-flex h-9 w-9 sm:h-7 sm:w-7 items-center justify-center rounded text-[#6B7280] transition-colors",
                 "hover:bg-[#E5E7EB]/60 hover:text-[#111827] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A]/25",
                 item.active && "bg-white text-[#1E3A8A] shadow-sm border border-[#E5E7EB]"
               )}
             >
-              <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+              <Icon className="h-4 w-4 sm:h-3.5 sm:w-3.5" aria-hidden="true" />
             </button>
           );
         })}
@@ -240,13 +240,13 @@ export function TiptapEditor({
           aria-label="Insert link"
           aria-pressed={editor.isActive("link")}
           className={cn(
-            "inline-flex h-7 w-7 items-center justify-center rounded text-[#6B7280] transition-colors",
+            "inline-flex h-9 w-9 sm:h-7 sm:w-7 items-center justify-center rounded text-[#6B7280] transition-colors",
             "hover:bg-[#E5E7EB]/60 hover:text-[#111827] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A]/25",
             editor.isActive("link") &&
               "bg-white text-[#1E3A8A] shadow-sm border border-[#E5E7EB]"
           )}
         >
-          <Link2 className="h-3.5 w-3.5" aria-hidden="true" />
+          <Link2 className="h-4 w-4 sm:h-3.5 sm:w-3.5" aria-hidden="true" />
         </button>
 
         <button
@@ -258,9 +258,9 @@ export function TiptapEditor({
           }}
           title="Insert image"
           aria-label="Insert image"
-          className="inline-flex h-7 w-7 items-center justify-center rounded text-[#6B7280] transition-colors hover:bg-[#E5E7EB]/60 hover:text-[#111827] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A]/25"
+          className="inline-flex h-9 w-9 sm:h-7 sm:w-7 items-center justify-center rounded text-[#6B7280] transition-colors hover:bg-[#E5E7EB]/60 hover:text-[#111827] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A]/25"
         >
-          <ImageIcon className="h-3.5 w-3.5" aria-hidden="true" />
+          <ImageIcon className="h-4 w-4 sm:h-3.5 sm:w-3.5" aria-hidden="true" />
         </button>
 
         <div className="ml-auto flex items-center gap-0.5">
@@ -270,9 +270,9 @@ export function TiptapEditor({
             disabled={!editor.can().undo()}
             title="Undo"
             aria-label="Undo"
-            className="inline-flex h-7 w-7 items-center justify-center rounded text-[#6B7280] hover:bg-[#E5E7EB]/60 hover:text-[#111827] disabled:opacity-40"
+            className="inline-flex h-9 w-9 sm:h-7 sm:w-7 items-center justify-center rounded text-[#6B7280] hover:bg-[#E5E7EB]/60 hover:text-[#111827] disabled:opacity-40"
           >
-            <Undo2 className="h-3.5 w-3.5" aria-hidden="true" />
+            <Undo2 className="h-4 w-4 sm:h-3.5 sm:w-3.5" aria-hidden="true" />
           </button>
           <button
             type="button"
@@ -280,9 +280,9 @@ export function TiptapEditor({
             disabled={!editor.can().redo()}
             title="Redo"
             aria-label="Redo"
-            className="inline-flex h-7 w-7 items-center justify-center rounded text-[#6B7280] hover:bg-[#E5E7EB]/60 hover:text-[#111827] disabled:opacity-40"
+            className="inline-flex h-9 w-9 sm:h-7 sm:w-7 items-center justify-center rounded text-[#6B7280] hover:bg-[#E5E7EB]/60 hover:text-[#111827] disabled:opacity-40"
           >
-            <Redo2 className="h-3.5 w-3.5" aria-hidden="true" />
+            <Redo2 className="h-4 w-4 sm:h-3.5 sm:w-3.5" aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -376,7 +376,7 @@ export function TiptapEditor({
       )}
 
       {/* Editor Canvas */}
-      <div className="px-5 py-4">
+      <div className="px-3.5 py-3 sm:px-5 sm:py-4">
         <EditorContent editor={editor} />
       </div>
     </div>

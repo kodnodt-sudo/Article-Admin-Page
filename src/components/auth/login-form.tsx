@@ -137,7 +137,7 @@ export function LoginForm({ isConfigured = true }: { isConfigured?: boolean }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={isSubmitting}
-            className="pr-9"
+            className="pr-10"
             required
           />
           <button
@@ -145,7 +145,7 @@ export function LoginForm({ isConfigured = true }: { isConfigured?: boolean }) {
             onClick={() => setShowPassword((prev) => !prev)}
             disabled={isSubmitting}
             aria-label={showPassword ? "Hide password" : "Show password"}
-            className="absolute inset-y-0 right-0 flex items-center px-2.5 text-[#6B7280] hover:text-[#111827] focus-visible:outline-none focus-visible:text-[#1E3A8A]"
+            className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-[#6B7280] hover:text-[#111827] focus-visible:outline-none focus-visible:text-[#1E3A8A]"
           >
             {showPassword ? (
               <EyeOff className="h-4 w-4" aria-hidden="true" />

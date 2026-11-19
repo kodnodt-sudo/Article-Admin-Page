@@ -17,7 +17,57 @@ export default async function CompaniesIndexPage() {
         </p>
       </div>
 
-      <div className="overflow-hidden rounded-lg border border-[#E5E7EB] bg-white">
+      {/* Mobile card list */}
+      <div className="space-y-3 sm:hidden">
+        {companies.map((company) => (
+          <Link
+            key={company.id}
+            href={`/companies/${company.slug}`}
+            className="block rounded-lg border border-[#E5E7EB] bg-white p-4 active:bg-[#FAFAFA]"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5 min-w-0">
+                {company.logo_url ? (
+                  <img
+                    src={company.logo_url}
+                    alt={`${company.name} logo`}
+                    className="h-8 w-8 shrink-0 rounded border border-[#E5E7EB] object-cover"
+                  />
+                ) : (
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded border border-[#E5E7EB] bg-[#FAFAFA] text-[11px] font-semibold text-[#111827]">
+                    {getInitials(company.name)}
+                  </span>
+                )}
+                <div className="min-w-0">
+                  <p className="truncate text-[14px] font-semibold text-[#111827]">
+                    {company.name}
+                  </p>
+                  <p className="truncate text-[12px] text-[#6B7280]">
+                    {company.domain}
+                  </p>
+                </div>
+              </div>
+              <ArrowUpRight className="h-4 w-4 shrink-0 text-[#6B7280]" aria-hidden="true" />
+            </div>
+            <div className="mt-3 flex items-center justify-between border-t border-[#F3F4F6] pt-2.5 text-[12px] text-[#6B7280]">
+              <span>
+                <strong className="font-medium text-[#111827] tabular-nums">
+                  {company.published_count}
+                </strong>{" "}
+                published ·{" "}
+                <strong className="font-medium text-[#111827] tabular-nums">
+                  {company.draft_count}
+                </strong>{" "}
+                drafts
+              </span>
+              <span className="tabular-nums">{formatDate(company.last_updated_at)}</span>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* Desktop table */}
+      <div className="hidden overflow-hidden rounded-lg border border-[#E5E7EB] bg-white sm:block">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-left text-[13px]">
             <thead>

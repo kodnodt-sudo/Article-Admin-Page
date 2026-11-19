@@ -91,7 +91,7 @@ export function AdminShell({ admin, children }: AdminShellProps) {
   }
 
   if (isEditorRoute) {
-    return <div className="min-h-screen bg-white">{children}</div>;
+    return <div className="min-h-dvh bg-white">{children}</div>;
   }
 
   const sidebarContent = (
@@ -166,7 +166,7 @@ export function AdminShell({ admin, children }: AdminShellProps) {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-dvh bg-white">
       {/* Desktop fixed sidebar */}
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-56 border-r border-[#E5E7EB] bg-[#FAFAFA] lg:block">
         {sidebarContent}
@@ -179,7 +179,7 @@ export function AdminShell({ admin, children }: AdminShellProps) {
           onClick={() => setMobileNavOpen(false)}
         >
           <aside
-            className="fixed inset-y-0 left-0 w-56 border-r border-[#E5E7EB] bg-[#FAFAFA]"
+            className="fixed inset-y-0 left-0 w-64 max-w-[80vw] border-r border-[#E5E7EB] bg-[#FAFAFA]"
             onClick={(e) => e.stopPropagation()}
           >
             {sidebarContent}
@@ -188,14 +188,14 @@ export function AdminShell({ admin, children }: AdminShellProps) {
       )}
 
       {/* Main area */}
-      <div className="flex min-h-screen flex-col lg:pl-56">
-        <header className="sticky top-0 z-20 flex h-14 items-center justify-between gap-4 border-b border-[#E5E7EB] bg-white px-4 sm:px-6">
-          <div className="flex flex-1 items-center gap-3">
+      <div className="flex min-h-dvh flex-col lg:pl-56">
+        <header className="sticky top-0 z-20 flex h-14 items-center justify-between gap-2.5 border-b border-[#E5E7EB] bg-white px-3.5 sm:gap-4 sm:px-6">
+          <div className="flex flex-1 items-center gap-2.5 sm:gap-3">
             <button
               type="button"
               onClick={() => setMobileNavOpen(true)}
               aria-label="Open navigation"
-              className="rounded-md border border-[#E5E7EB] p-1.5 text-[#6B7280] hover:bg-[#FAFAFA] hover:text-[#111827] lg:hidden"
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-[#E5E7EB] text-[#6B7280] hover:bg-[#FAFAFA] hover:text-[#111827] lg:hidden"
             >
               <Menu className="h-4 w-4" />
             </button>
@@ -215,7 +215,7 @@ export function AdminShell({ admin, children }: AdminShellProps) {
                 onChange={(e) => setSearchValue(e.target.value)}
                 placeholder="Search companies or articles..."
                 aria-label="Search companies or articles"
-                className="h-8 w-full rounded-md border border-[#E5E7EB] bg-[#FAFAFA] pl-8 pr-3 text-[13px] text-[#111827] placeholder:text-[#9CA3AF] transition-colors focus:border-[#1E3A8A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1E3A8A]/15"
+                className="h-9 sm:h-8 w-full rounded-md border border-[#E5E7EB] bg-[#FAFAFA] pl-8 pr-3 text-[16px] sm:text-[13px] text-[#111827] placeholder:text-[#9CA3AF] transition-colors focus:border-[#1E3A8A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1E3A8A]/15"
               />
             </form>
           </div>

@@ -310,14 +310,14 @@ export function ArticleEditor({
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-dvh bg-white">
       {/* Sticky Top Bar */}
       <header className="sticky top-0 z-30 border-b border-[#E5E7EB] bg-white">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-          <div className="flex items-center gap-3 min-w-0">
+        <div className="mx-auto flex min-h-14 max-w-6xl flex-wrap items-center justify-between gap-2 px-3.5 py-2 sm:flex-nowrap sm:gap-4 sm:px-6 sm:py-0">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <Link
               href={`/companies/${company.slug}`}
-              className="inline-flex items-center gap-1.5 rounded-md border border-[#E5E7EB] bg-white px-2.5 py-1.5 text-[13px] font-medium text-[#111827] hover:bg-[#FAFAFA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A]/25"
+              className="inline-flex h-9 sm:h-8 items-center gap-1.5 rounded-md border border-[#E5E7EB] bg-white px-2.5 text-[13px] font-medium text-[#111827] hover:bg-[#FAFAFA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A]/25"
             >
               <ArrowLeft className="h-3.5 w-3.5 text-[#6B7280]" aria-hidden="true" />
               Back
@@ -330,26 +330,26 @@ export function ArticleEditor({
             </Badge>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {/* Save indicator */}
             <div
-              className="hidden items-center gap-1.5 pr-2 text-[12px] text-[#6B7280] sm:flex"
+              className="flex items-center gap-1 pr-1 sm:pr-2 text-[12px] text-[#6B7280]"
               aria-live="polite"
             >
               {saveState === "saving" && (
                 <>
                   <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden="true" />
-                  <span>Saving…</span>
+                  <span className="hidden sm:inline">Saving…</span>
                 </>
               )}
               {saveState === "saved" && (
                 <>
                   <Check className="h-3.5 w-3.5 text-[#166534]" aria-hidden="true" />
-                  <span>Saved</span>
+                  <span className="hidden sm:inline">Saved</span>
                 </>
               )}
               {saveState === "error" && (
-                <span className="text-[#DC2626]">Save failed</span>
+                <span className="text-[#DC2626]">Failed</span>
               )}
             </div>
 
@@ -422,7 +422,7 @@ export function ArticleEditor({
                 value={title}
                 onChange={(e) => handleTitleChange(e.target.value)}
                 placeholder="Article title"
-                className="w-full border-0 bg-transparent px-0 py-1 text-[28px] font-semibold leading-tight tracking-tight text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none"
+                className="w-full border-0 bg-transparent px-0 py-1 text-[22px] sm:text-[28px] font-semibold leading-tight tracking-tight text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none"
               />
             </div>
 
@@ -516,7 +516,7 @@ export function ArticleEditor({
                   value={excerpt}
                   onChange={(e) => setExcerpt(e.target.value)}
                   placeholder="Short summary for article listings..."
-                  className="w-full rounded-md border border-[#E5E7EB] bg-white px-3 py-2 text-[13px] text-[#111827] placeholder:text-[#9CA3AF] focus:border-[#1E3A8A] focus:outline-none focus:ring-2 focus:ring-[#1E3A8A]/15"
+                  className="w-full rounded-md border border-[#E5E7EB] bg-white px-3 py-2 text-[16px] sm:text-[13px] text-[#111827] placeholder:text-[#9CA3AF] focus:border-[#1E3A8A] focus:outline-none focus:ring-2 focus:ring-[#1E3A8A]/15"
                 />
               </div>
             </div>
@@ -556,7 +556,7 @@ export function ArticleEditor({
                   value={metaDescription}
                   onChange={(e) => setMetaDescription(e.target.value)}
                   placeholder="Optional search engine description..."
-                  className="w-full rounded-md border border-[#E5E7EB] bg-white px-3 py-2 text-[13px] text-[#111827] placeholder:text-[#9CA3AF] focus:border-[#1E3A8A] focus:outline-none focus:ring-2 focus:ring-[#1E3A8A]/15"
+                  className="w-full rounded-md border border-[#E5E7EB] bg-white px-3 py-2 text-[16px] sm:text-[13px] text-[#111827] placeholder:text-[#9CA3AF] focus:border-[#1E3A8A] focus:outline-none focus:ring-2 focus:ring-[#1E3A8A]/15"
                 />
               </div>
             </div>
