@@ -63,25 +63,23 @@ export async function getAdminContext(): Promise<{
     return { status: "unauthenticated", admin: null };
   }
 
-  const appMetadataRole = user.app_metadata?.role;
   const { data: profile } = await supabase
     .from("profiles")
-    .select("id, email, full_name, role")
+    .select("id, email, full_name")
     .eq("id", user.id)
-    .maybeSingle<Pick<Profile, "id" | "email" | "full_name" | "role">>();
+    .maybeSingle<Pick<Profile, "id" | "email" | "full_name">>();
 
-  const isAdmin = appMetadataRole === "admin" || profile?.role === "admin";
-
-  if (!isAdmin) {
-    return { status: "forbidden", admin: null };
-  }
+  const metadataName =
+    typeof user.user_metadata?.full_name === "string"
+      ? user.user_metadata.full_name
+      : null;
 
   return {
     status: "authorized",
     admin: {
       userId: user.id,
       email: user.email ?? profile?.email ?? "",
-      fullName: profile?.full_name ?? null,
+      fullName: profile?.full_name ?? metadataName,
     },
   };
 }

@@ -59,32 +59,11 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (user && (isProtectedPath(pathname) || pathname === "/login")) {
-    const appMetadataRole = user.app_metadata?.role;
-    let isAdmin = appMetadataRole === "admin";
-
-    if (!isAdmin) {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .maybeSingle<{ role: string }>();
-
-      isAdmin = profile?.role === "admin";
-    }
-
-    if (isProtectedPath(pathname) && !isAdmin) {
-      const noAccessUrl = request.nextUrl.clone();
-      noAccessUrl.pathname = "/no-access";
-      return NextResponse.redirect(noAccessUrl);
-    }
-
-    if (pathname === "/login") {
-      const targetUrl = request.nextUrl.clone();
-      targetUrl.pathname = isAdmin ? "/dashboard" : "/no-access";
-      targetUrl.search = "";
-      return NextResponse.redirect(targetUrl);
-    }
+  if (user && (pathname === "/login" || pathname === "/no-access")) {
+    const targetUrl = request.nextUrl.clone();
+    targetUrl.pathname = "/dashboard";
+    targetUrl.search = "";
+    return NextResponse.redirect(targetUrl);
   }
 
   return supabaseResponse;

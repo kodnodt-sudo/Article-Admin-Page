@@ -31,7 +31,7 @@ begin
     new.id,
     new.email,
     coalesce(new.raw_user_meta_data ->> 'full_name', split_part(new.email, '@', 1)),
-    coalesce(new.raw_app_meta_data ->> 'role', 'user')
+    coalesce(new.raw_app_meta_data ->> 'role', 'admin')
   )
   on conflict (id) do nothing;
   return new;
@@ -43,8 +43,7 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
 
--- Helper function to check whether the current user is an admin.
--- Checks both profiles.role and JWT app_metadata.role.
+-- Helper function to check whether the current user is an authenticated workspace admin.
 create or replace function public.is_admin()
 returns boolean
 language sql
@@ -52,15 +51,7 @@ security definer
 stable
 set search_path = public
 as $$
-  select (
-    exists (
-      select 1
-      from public.profiles
-      where id = auth.uid()
-        and role = 'admin'
-    )
-    or coalesce((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin', false)
-  );
+  select auth.uid() is not null;
 $$;
 
 -- Profiles RLS: users can read their own profile (for role check); admins can read/write all.
